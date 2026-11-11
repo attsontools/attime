@@ -1,0 +1,29 @@
+{
+  "name": "attime",
+  "private": true,
+  "version": "0.1.0-alpha.0",
+  "type": "module",
+  "packageManager": "pnpm@10.29.3",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 1424",
+    "build": "tsc && vite build",
+    "build:plugin": "tsc && vite build --mode plugin --outDir dist-plugin",
+    "package:plugin": "pnpm build:plugin && tsx scripts/package-plugin.mjs",
+    "test": "tsx --test test/*.test.ts",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "dependencies": {
+    "@attson/plugin-sdk": "github:attsontools/attool-plugin-sdk#v0.1.0-alpha.0",
+    "@tauri-apps/api": "2.12.3",
+    "vue": "3.5.33"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.2",
+    "@vitejs/plugin-vue": "6.0.6",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vite": "8.0.10"
+  }
+}
