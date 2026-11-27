@@ -53,6 +53,7 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 input, select { min-width: 0; padding: 5px 9px; }
 
 .app-shell { height: 100vh; display: grid; grid-template-rows: 58px 46px minmax(0, 1fr); background: var(--bg); }
+.app-shell.is-plugin { grid-template-rows: 46px minmax(0, 1fr); }
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 18px; border-bottom: 1px solid var(--line); background: var(--surface); }
 .brand, .top-actions { min-width: 0; display: flex; align-items: center; gap: 10px; }
 .brand-mark { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; border-radius: var(--radius); background: var(--accent); color: var(--accent-fg); font: 700 13px var(--mono); }
@@ -65,10 +66,13 @@ input, select { min-width: 0; padding: 5px 9px; }
 .icon-button { width: 32px; padding: 6px; display: grid; place-items: center; }
 .icon-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-.tabs { display: flex; align-items: end; gap: 2px; padding: 0 18px; overflow-x: auto; border-bottom: 1px solid var(--line); background: var(--surface); }
+.tabs { display: flex; align-items: stretch; padding: 0 18px; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--surface); }
+.tab-list { min-width: 0; display: flex; flex: 1; align-items: end; gap: 2px; overflow-x: auto; }
 .tabs button { height: 45px; min-width: 86px; flex: 0 0 auto; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: var(--muted); }
 .tabs button:hover { color: var(--text); }
 .tabs button.active { border-bottom-color: var(--accent); color: var(--accent); }
+.tabs-status { min-width: 56px; align-self: center; margin-left: 8px; visibility: hidden; text-align: center; }
+.tabs-status.is-visible { visibility: visible; }
 
 .workspace { min-height: 0; display: grid; align-content: start; gap: 12px; padding: 16px 18px 22px; overflow: auto; }
 .panel { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
@@ -106,6 +110,7 @@ td:last-child { width: 20%; }
 .runs li { padding: 7px 10px; border-radius: var(--radius-sm); background: var(--surface-2); counter-increment: run; }
 .runs li::before { content: counter(run); display: inline-block; width: 28px; color: var(--muted); }
 .center-state { grid-row: 2 / -1; min-height: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.app-shell.is-plugin .center-state { grid-row: 1 / -1; }
 .error-state { flex-direction: column; gap: 5px; padding: 24px; text-align: center; }
 .error-state strong { color: var(--text); }
 

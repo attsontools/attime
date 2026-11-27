@@ -185,8 +185,8 @@ function formatCronRun(ms: number): string {
 </script>
 
 <template>
-  <main class="app-shell">
-    <header class="topbar">
+  <main class="app-shell" :class="{ 'is-plugin': host.mode === 'plugin' }">
+    <header v-if="host.mode === 'standalone'" class="topbar">
       <div class="brand">
         <span class="brand-mark">时</span>
         <div class="brand-copy">
@@ -198,9 +198,8 @@ function formatCronRun(ms: number): string {
         <span v-if="copyState !== 'idle'" class="copy-state" :class="`is-${copyState}`">
           {{ copyState === 'ok' ? '已复制' : '复制失败' }}
         </span>
-        <span class="host-badge">{{ host.mode === 'plugin' ? '平台插件' : '独立应用' }}</span>
+        <span class="host-badge">独立应用</span>
         <button
-          v-if="host.mode === 'standalone'"
           class="icon-button"
           type="button"
           :title="theme === 'dark' ? '切换到浅色' : '切换到深色'"
@@ -221,13 +220,23 @@ function formatCronRun(ms: number): string {
 
     <template v-else>
       <nav class="tabs" aria-label="时间工具">
-        <button
-          v-for="item in tabs"
-          :key="item.id"
-          type="button"
-          :class="{ active: active === item.id }"
-          @click="active = item.id"
-        >{{ item.label }}</button>
+        <div class="tab-list">
+          <button
+            v-for="item in tabs"
+            :key="item.id"
+            type="button"
+            :class="{ active: active === item.id }"
+            @click="active = item.id"
+          >{{ item.label }}</button>
+        </div>
+        <span
+          v-if="host.mode === 'plugin'"
+          class="copy-state tabs-status"
+          :class="{ 'is-visible': copyState !== 'idle', [`is-${copyState}`]: true }"
+          aria-live="polite"
+        >
+          {{ copyState === 'fail' ? '复制失败' : '已复制' }}
+        </span>
       </nav>
 
       <section v-if="active === 'timestamp'" class="workspace">
